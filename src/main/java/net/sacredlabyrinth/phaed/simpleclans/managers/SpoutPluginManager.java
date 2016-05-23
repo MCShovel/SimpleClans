@@ -8,12 +8,10 @@ import net.sacredlabyrinth.phaed.simpleclans.uuid.UUIDMigration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.getspout.spoutapi.player.SpoutPlayer;
 
 import java.util.Collection;
 import java.util.UUID;
 
-import static org.getspout.spoutapi.SpoutManager.*;
 /**
  * @author phaed
  */
@@ -38,12 +36,6 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            Collection<Player> onlinePlayers = Helper.getOnlinePlayers();
-
-            for (Player player : onlinePlayers)
-            {
-                processPlayer(player);
-            }
         }
     }
 
@@ -57,12 +49,6 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            Player player = Helper.getPlayer(playerName);
-
-            if (player != null)
-            {
-                processPlayer(player);
-            }
         }
     }
 
@@ -75,12 +61,6 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            Player player = SimpleClans.getInstance().getServer().getPlayer(playerUniqueId);
-
-            if (player != null)
-            {
-                processPlayer(player);
-            }
         }
     }
 
@@ -93,45 +73,6 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            ClanPlayer cp = plugin.getClanManager().getClanPlayer(player);
-
-            if (cp != null && cp.getClan().isVerified())
-            {
-                Clan clan = cp.getClan();
-
-                SpoutPlayer sp = getPlayer(player);
-
-                if (plugin.getSettingsManager().isClanCapes())
-                {
-                    if (!clan.getCapeUrl().isEmpty())
-                    {
-                        if (clan.getCapeUrl().toLowerCase().contains(".png"))
-                        {
-                            sp.setCape(clan.getCapeUrl());
-                        }
-                    }
-                    else
-                    {
-                        if (plugin.getSettingsManager().getDefaultCapeUrl().toLowerCase().contains(".png"))
-                        {
-                            sp.setCape(plugin.getSettingsManager().getDefaultCapeUrl());
-                        }
-                    }
-                }
-
-                if (plugin.getSettingsManager().isInGameTags())
-                {
-                    if (player.isSneaking())
-                    {
-                        sp.setTitle(player.getName());
-                    }
-                    else
-                    {
-                        String tag = plugin.getSettingsManager().isInGameTagsColored() ? (plugin.getSettingsManager().getTagBracketColor() + plugin.getSettingsManager().getTagBracketLeft() + clan.getColorTag() + plugin.getSettingsManager().getTagBracketColor() + plugin.getSettingsManager().getTagBracketRight() + plugin.getSettingsManager().getTagSeparatorColor() + plugin.getSettingsManager().getTagSeparator()) : ChatColor.DARK_GRAY + plugin.getSettingsManager().getTagBracketLeft() + clan.getTag() + plugin.getSettingsManager().getTagBracketRight() + plugin.getSettingsManager().getTagSeparator();
-                        sp.setTitle(tag + ChatColor.WHITE + player.getName());
-                    }
-                }
-            }
         }
     }
 
@@ -144,13 +85,6 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            ClanPlayer cp = plugin.getClanManager().getClanPlayer(player);
-
-            if (cp != null && cp.getClan().isVerified())
-            {
-                SpoutPlayer sp = getPlayer(player);
-                sp.setCape("");
-            }
         }
     }
 
@@ -163,20 +97,11 @@ public final class SpoutPluginManager
     {
         if (isHasSpout())
         {
-            SpoutPlayer sp = getPlayerFromId(player.getEntityId());
-            getSoundManager().playCustomSoundEffect(plugin, sp, plugin.getSettingsManager().getAlertUrl(), true);
         }
     }
 
     private boolean checkSpout()
     {
-        Plugin test = plugin.getServer().getPluginManager().getPlugin("Spout");
-
-        if (test != null)
-        {
-            SimpleClans.log(plugin.getLang("spout.features.enabled"));
-            return true;
-        }
         return false;
     }
 

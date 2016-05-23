@@ -22,37 +22,6 @@
                 </includes>
             </resource>
         </resources>
-
-        <!-- Plugins -->
-        <plugins>
-            <!-- Compilation plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                    <fork>true</fork>
-                </configuration>
-            </plugin>
-
-            <!-- JAR creation plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
-
-            <!-- Release plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.3.2</version>
-            </plugin>
-        </plugins>
     </build>
     <!-- Dependencies -->
     <dependencies>
@@ -60,13 +29,15 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.9-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>/opt/msm/src/spigot/craftbukkit-1.9.2.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
-            <artifactId>VaultAPI</artifactId>
-            <version>1.4</version>
-            <scope>provided</scope>
+            <artifactId>Vault</artifactId>
+            <version>1.2.32</version>
+            <scope>system</scope>
+            <systemPath>/opt/msm/plugins/Vault/Vault.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nijikokun.bukkit</groupId>
@@ -74,57 +45,76 @@
             <version>2.7.4</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>net.sacredlabyrinth.Phaed</groupId>
             <artifactId>PreciousStones</artifactId>
             <version>9.7.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
+        </dependency-->
+        <!--dependency>
             <groupId>org.getspout</groupId>
             <artifactId>spoutplugin</artifactId>
             <version>dev-SNAPSHOT</version>
-        </dependency>
+        </dependency-->
     </dependencies>
 
-    <!-- Repositories -->
     <repositories>
         <repository>
-            <id>remote-repos</id>
-            <url>http://104.236.246.108:8081/artifactory/remote-repos</url>
+            <id>bungee-repo</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>md5-snapshot</id>
+            <url>http://repo.md-5.net/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>md_5-releases</id>
+            <url>http://repo.md-5.net/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>md_5-public</id>
+            <url>http://repo.md-5.net/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>essentials-repo</id>
+            <url>http://repo.ess3.net/content/groups/essentials</url>
+        </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/repo</url>
+        </repository>
+        <repository>
+            <id>vault-repo</id>
+            <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>repository</id>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <url>file://${project.basedir}/lib/repository/</url>
         </repository>
     </repositories>
 
-    <!-- GitHub/Jenkins -->
-
-    <ciManagement>
-        <system>jenkins</system>
-        <url>http://104.236.246.108:8080</url>
-    </ciManagement>
-
-    <scm>
-        <connection>scm:git:git:@github.com:marcelo-mason/SimpleClans.git</connection>
-        <developerConnection>scm:git:git:@github.com:marcelo-mason/SimpleClans.git</developerConnection>
-        <url>http://github.com/marcelo-mason/SimpleClans.git/tree/master/</url>
-        <tag>SimpleClans</tag>
-    </scm>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
-    <!-- Upstream Distribution -->
-
-    <distributionManagement>
-        <repository>
-            <id>SacredCoding</id>
-            <name>SacredCoding-releases</name>
-            <url>http://104.236.246.108:8081/artifactory/plugins-release-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>SacredCoding</id>
-            <name>SacredCoding-snapshots</name>
-            <url>http://104.236.246.108:8081/artifactory/plugins-release-local</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
