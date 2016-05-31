@@ -90,7 +90,7 @@ public class SCPlayerListener implements Listener
                 }
             }
         }
-        if (command.equals("."))
+        if (command.equals(".") || command.equalsIgnoreCase("c"))
         {
             if (!plugin.getSettingsManager().getClanChatEnable())
             {
