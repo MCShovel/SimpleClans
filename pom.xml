@@ -30,14 +30,14 @@
             <artifactId>bukkit</artifactId>
             <version>1.9-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>/opt/msm/src/spigot/craftbukkit.jar</systemPath>
+            <systemPath>${basedir}/../spigot/craftbukkit.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.2.32</version>
             <scope>system</scope>
-            <systemPath>/opt/msm/plugins/Vault/Vault.jar</systemPath>
+            <systemPath>${basedir}/../../plugins/Vault/Vault.jar</systemPath>
         </dependency>
     </dependencies>
 
